@@ -1,0 +1,26 @@
+/* Global variables and small utilities */
+:root {
+  --bg-1: linear-gradient(135deg, #4f46e5, #6366f1);
+  --panel-bg: #ffffff;
+  --muted: #6b7280;
+  --brand: #4f46e5;
+  --radius: 12px;
+  --shadow: 0 20px 40px rgba(0,0,0,0.12);
+  --max-width: 880px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+a { color: var(--brand); text-decoration: none; font-weight: 600; }
+a:hover { opacity: 0.9; }
+
+.center { text-align: center; }
+.muted { color: var(--muted); }
+.error { background: #fee2e2; color: #991b1b; padding: 8px; border-radius: 8px; margin-bottom: 8px; }
+
+/* Minimal reset */
+* { box-sizing: border-box; }
+html,body,#root { height: 100%; }
+body { margin: 0; }
+
+code.token { font-family: monospace; background: #f3f4f6; padding: 4px 8px; border-radius: 6px; }
+
