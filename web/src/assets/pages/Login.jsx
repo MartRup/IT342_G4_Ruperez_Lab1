@@ -96,7 +96,7 @@ const Login = () => {
         <p className="muted center">Set <code>.env.local</code> with <code>VITE_GOOGLE_CLIENT_ID</code> to enable Google sign-in</p>
       )}
 
-      <p className="center muted" style={{ marginTop: 12 }}>Don't have an account? <Link to="/register">Create one</Link></p>
+      <p className="center muted" style={{ marginTop: 12 }}>Don't have an account? <Link className="create-link" to="/register">Create one</Link></p>
     </div>
   );
 };

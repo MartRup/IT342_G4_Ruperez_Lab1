@@ -49,7 +49,7 @@ const Register = () => {
         <button className="button-cta" type="submit">Create account</button>
       </form>
 
-      <p className="center muted">Already have an account? <Link to="/login">Sign in</Link></p>
+      <p className="center muted">Already have an account? <Link className="signin-link" to="/login">Sign in</Link></p>
     </div>
   );
 };

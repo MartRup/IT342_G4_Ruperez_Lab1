@@ -3,6 +3,7 @@ import './App.css';
 import Login from './assets/pages/Login';
 import Register from './assets/pages/Register';
 import Dashboard from './assets/pages/Dashboard';
+import ForgotPassword from './assets/pages/ForgotPassword';
 import Header from './components/Header';
 import RequireAuth from './components/RequireAuth';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -18,11 +19,11 @@ function App() {
     <Router>
       <Header />
       <main className="app-main">
-        <div style={{position:'absolute', top:10, right:10, color:'rgba(0,0,0,0.35)'}}>debug: app</div>
         <ErrorBoundary>
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/forgot" element={<ForgotPassword />} />
             {/* Protected Route: Dashboard */}
             <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
             <Route path="/" element={<Navigate to="/login" />} />

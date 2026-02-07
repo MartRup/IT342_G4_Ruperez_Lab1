@@ -3,7 +3,6 @@ package com.example.miniapplication.service;
 import com.example.miniapplication.entity.User;
 import com.example.miniapplication.repository.UserRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDateTime;
@@ -11,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
 public class UserService {
 
     private final UserRepository userRepository;
