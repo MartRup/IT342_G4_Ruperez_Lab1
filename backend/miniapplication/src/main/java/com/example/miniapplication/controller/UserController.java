@@ -49,6 +49,14 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> create(@RequestBody CreateUserRequest req) {
+        // Check if user already exists
+        if (userService.findByUsername(req.getUsername()).isPresent()) {
+            return ResponseEntity.badRequest().build();
+        }
+        if (userService.findByEmail(req.getEmail()).isPresent()) {
+            return ResponseEntity.badRequest().build();
+        }
+        
         User created = userService.createUser(req.getUsername(), req.getEmail(), req.getPassword());
         return ResponseEntity.created(URI.create("/api/users/" + created.getId())).body(created);
     }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { authService } from '../../utils/api';
 import logoUrl from '../images/logo.svg';
 
 const Login = () => {
@@ -9,17 +10,32 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     if (!email || !password) {
       setError('Please fill in both fields.');
       return;
     }
-    // Demo auth
-    localStorage.setItem('token', 'dummy-token');
-    localStorage.setItem('userFirstName', email.split('@')[0]);
-    if (remember) localStorage.setItem('remember', '1');
-    navigate('/dashboard');
+
+    try {
+      const response = await authService.login({
+        username: email,
+        password: password
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('userFirstName', data.username);
+        if (remember) localStorage.setItem('remember', '1');
+        navigate('/dashboard');
+      } else {
+        setError(data.error || 'Login failed');
+      }
+    } catch (err) {
+      setError('Network error. Please try again.');
+    }
   };
 
   // Google Identity Services callback

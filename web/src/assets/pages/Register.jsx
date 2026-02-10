@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { authService } from '../../utils/api';
 import logoUrl from '../images/logo.svg';
 
 const Register = () => {
@@ -13,15 +14,32 @@ const Register = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     if (!formData.firstName || !formData.email || !formData.password) {
       setError('Please fill in all required fields.');
       return;
     }
-    // Demo registration
-    localStorage.setItem('userFirstName', formData.firstName);
-    navigate('/login');
+
+    try {
+      const response = await authService.register({
+        username: formData.firstName,
+        email: formData.email,
+        password: formData.password
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('userFirstName', data.username);
+        navigate('/dashboard');
+      } else {
+        setError(data.error || 'Registration failed');
+      }
+    } catch (err) {
+      setError('Network error. Please try again.');
+    }
   };
 
   return (
