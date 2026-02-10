@@ -5,17 +5,20 @@
 body {
   margin: 0;
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
   color: #0f172a;
   min-height: 100vh;
   background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Header Styles */
 .app-header {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.7);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   position: sticky;
   top: 0;
@@ -36,12 +39,10 @@ body {
 .app-header .brand {
   font-size: 24px;
   font-weight: 800;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #1e293b;
   margin: 0;
   letter-spacing: -0.5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .app-header nav {
@@ -52,7 +53,7 @@ body {
 
 .app-header nav a {
   text-decoration: none;
-  color: #64748b;
+  color: #1e293b;
   font-weight: 600;
   font-size: 15px;
   transition: all 0.3s ease;
@@ -106,82 +107,87 @@ body {
 
 .auth-container,
 .dashboard-container {
-  min-height: calc(100vh - 70px);
+  min-height: 100vh;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 32px;
-  padding-top: 48px;
+  padding: 15px;
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  background-attachment: fixed;
+  overflow: hidden;
 }
 
 .logo {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   margin-bottom: 20px;
-  filter: drop-shadow(0 8px 20px rgba(99, 102, 241, 0.3));
-  animation: float 3s ease-in-out infinite;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.1));
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+.login-card {
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+  padding: 25px;
+  width: 100%;
+  max-width: 400px;
+  max-height: 95vh;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  text-align: center;
+  overflow-y: hidden;
 }
 
 .brand-pill {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
   padding: 12px 20px;
   border-radius: 999px;
   margin-bottom: 24px;
-  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.2);
-  border: 1px solid rgba(99, 102, 241, 0.1);
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+  border: 1px solid rgba(59, 130, 246, 0.2);
   animation: fadeInUp 0.6s ease-out;
 }
 
 .brand-dot {
   width: 10px;
   height: 10px;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  background: white;
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .brand-text {
   font-weight: 700;
   font-size: 16px;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 h2,
 h1 {
   margin: 12px 0 16px 0;
   text-align: center;
-  color: #1e293b;
+  color: #0f172a;
   font-weight: 800;
   letter-spacing: -0.5px;
   animation: fadeInUp 0.6s ease-out 0.1s both;
 }
 
 h1 {
-  font-size: 40px;
-  background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 36px;
+  color: #0f172a;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 h2 {
-  font-size: 32px;
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 28px;
+  color: #0f172a;
 }
 
 .muted {
@@ -199,7 +205,7 @@ form {
   max-width: 420px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 15px;
   animation: fadeInUp 0.6s ease-out 0.3s both;
 }
 
@@ -207,24 +213,25 @@ form {
   display: flex;
   align-items: center;
   gap: 14px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(226, 232, 240, 0.7);
-  padding: 16px 18px;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  padding: 14px 16px;
   border-radius: 16px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
 .form-row:focus-within {
-  border-color: #6366f1;
-  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15), 0 8px 25px rgba(99, 102, 241, 0.1);
-  transform: translateY(-2px);
+  border-color: #3b82f6;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), 0 4px 15px rgba(59, 130, 246, 0.1);
+  transform: translateY(-1px);
 }
 
 .form-row:hover {
-  border-color: #c7d2fe;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border-color: #cbd5e1;
+  background: #f1f5f9;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .form-row input {
@@ -233,7 +240,7 @@ form {
   width: 100%;
   font-size: 16px;
   font-weight: 500;
-  color: #1e293b;
+  color: #0f172a;
   background: transparent;
 }
 
@@ -251,7 +258,7 @@ form {
 }
 
 .form-row:focus-within .form-icon {
-  color: #6366f1;
+  color: #3b82f6;
   transform: scale(1.1);
 }
 
@@ -273,13 +280,13 @@ form {
 
 .forgot {
   text-decoration: none;
-  color: #6366f1;
+  color: #3b82f6;
   font-weight: 600;
   transition: all 0.2s ease;
 }
 
 .forgot:hover {
-  color: #4f46e5;
+  color: #2563eb;
   text-decoration: underline;
 }
 
@@ -288,13 +295,13 @@ form {
   padding: 16px 28px;
   border: none;
   border-radius: 14px;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   color: white;
   font-weight: 700;
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
   letter-spacing: 0.5px;
   position: relative;
   overflow: hidden;
@@ -312,9 +319,9 @@ form {
 }
 
 .button-cta:hover {
-  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.5);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.5);
 }
 
 .button-cta:hover::before {
@@ -406,11 +413,10 @@ form {
 .card {
   width: 100%;
   max-width: 650px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
+  background: white;
   border-radius: 20px;
   padding: 32px;
-  border: 1px solid rgba(226, 232, 240, 0.5);
+  border: 1px solid #e2e8f0;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   animation: fadeInUp 0.6s ease-out 0.2s both;
   transition: all 0.3s ease;
@@ -452,10 +458,7 @@ form {
 .create-link,
 .signin-link {
   text-decoration: none;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #3b82f6;
   font-weight: 700;
   transition: all 0.3s ease;
   position: relative;
@@ -464,11 +467,8 @@ form {
 
 .create-link:hover,
 .signin-link:hover {
-  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  transform: translateY(-2px);
+  color: #2563eb;
+  transform: translateY(-1px);
 }
 
 .create-link::after,
@@ -479,7 +479,7 @@ form {
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  background: #3b82f6;
   transition: width 0.3s ease;
 }
 
@@ -515,11 +515,23 @@ form {
   
   .auth-container,
   .dashboard-container {
-    padding: 20px;
+    padding: 10px;
+    max-height: 100vh;
+  }
+  
+  .login-card {
+    padding: 20px 15px;
+    max-width: 100%;
+    max-height: 98vh;
   }
   
   form {
     max-width: 100%;
+    gap: 12px;
+  }
+  
+  .form-row {
+    padding: 12px 14px;
   }
   
   h1 {
@@ -527,11 +539,11 @@ form {
   }
   
   h2 {
-    font-size: 28px;
+    font-size: 26px;
   }
   
   .dashboard-hero h1 {
-    font-size: 34px;
+    font-size: 30px;
   }
   
   .card {
@@ -540,7 +552,7 @@ form {
   }
   
   .logo {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
   }
 }
