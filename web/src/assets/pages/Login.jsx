@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { authService } from '../../utils/api';
 import logoUrl from '../images/logo.svg';
@@ -6,7 +6,6 @@ import logoUrl from '../images/logo.svg';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [remember, setRemember] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -28,7 +27,6 @@ const Login = () => {
       if (response.ok) {
         localStorage.setItem('token', data.token);
         localStorage.setItem('userFirstName', data.username);
-        if (remember) localStorage.setItem('remember', '1');
         navigate('/dashboard');
       } else {
         setError(data.error || 'Login failed');
@@ -37,47 +35,6 @@ const Login = () => {
       setError('Network error. Please try again.');
     }
   };
-
-  // Google Identity Services callback
-  const handleGoogleCredential = (response) => {
-    // response.credential is a JWT from Google containing user info
-    try {
-      const payload = JSON.parse(atob(response.credential.split('.')[1]));
-      const name = payload.given_name || payload.name || payload.email.split('@')[0];
-      localStorage.setItem('token', response.credential);
-      localStorage.setItem('userFirstName', name);
-      navigate('/dashboard');
-    } catch (e) {
-      console.error('Failed to parse Google credential', e);
-      setError('Google sign-in failed');
-    }
-  };
-
-  // Render Google button when client id is present
-  useEffect(() => {
-    const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-    if (!googleClientId || typeof window === 'undefined') return;
-
-    let attempts = 0;
-    const tryInit = () => {
-      attempts += 1;
-      if (window.google && window.google.accounts && window.google.accounts.id) {
-        window.google.accounts.id.initialize({
-          client_id: googleClientId,
-          callback: handleGoogleCredential,
-        });
-        window.google.accounts.id.renderButton(document.getElementById('google-button'), {
-          theme: 'filled_blue',
-          size: 'large',
-          type: 'standard'
-        });
-        return;
-      }
-      if (attempts < 10) setTimeout(tryInit, 300);
-    };
-
-    tryInit();
-  }, []);
 
   return (
     <div className="auth-container">
@@ -99,18 +56,8 @@ const Login = () => {
           <input aria-label="password" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         </div>
 
-        <div className="helper-row">
-          <label className="remember"><input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} /> Remember me</label>
-          <Link className="forgot" to="/forgot">Forgot?</Link>
-        </div>
-
         <button className="button-cta" type="submit">Sign in</button>
       </form>
-
-      <div id="google-button" style={{ marginTop: 14, display: (import.meta.env.VITE_GOOGLE_CLIENT_ID ? 'block' : 'none') }}></div>
-      {!import.meta.env.VITE_GOOGLE_CLIENT_ID && (
-        <p className="muted center">Set <code>.env.local</code> with <code>VITE_GOOGLE_CLIENT_ID</code> to enable Google sign-in</p>
-      )}
 
       <p className="center muted" style={{ marginTop: 12 }}>Don't have an account? <Link className="create-link" to="/register">Create one</Link></p>
     </div>
