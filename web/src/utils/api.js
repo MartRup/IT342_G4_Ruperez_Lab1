@@ -1,6 +1,6 @@
 // Utility functions for API calls with JWT authentication
 
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = 'http://localhost:8083/api';
 
 // Function to get the JWT token from localStorage
 const getToken = () => {

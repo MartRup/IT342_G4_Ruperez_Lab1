@@ -16,7 +16,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "*")
 public class AuthController {
 
     @Autowired
@@ -35,13 +34,11 @@ public class AuthController {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             loginRequest.getUsername(),
-                            loginRequest.getPassword()
-                    )
-            );
+                            loginRequest.getPassword()));
 
             // Load user details and generate token
-            org.springframework.security.core.userdetails.UserDetails userDetails =
-                    (org.springframework.security.core.userdetails.UserDetails) authentication.getPrincipal();
+            org.springframework.security.core.userdetails.UserDetails userDetails = (org.springframework.security.core.userdetails.UserDetails) authentication
+                    .getPrincipal();
 
             String token = jwtUtil.generateToken(userDetails.getUsername());
 
@@ -50,7 +47,7 @@ public class AuthController {
             response.put("token", token);
             response.put("tokenType", "Bearer");
             response.put("username", userDetails.getUsername());
-            response.put("id", ((User) userService.findByUsername(loginRequest.getUsername()).orElse(null)).getId());
+            response.put("id", ((User) userDetails).getId());
 
             return ResponseEntity.ok(response);
         } catch (Exception e) {
@@ -80,8 +77,7 @@ public class AuthController {
             User user = userService.createUser(
                     registerRequest.getUsername(),
                     registerRequest.getEmail(),
-                    registerRequest.getPassword()
-            );
+                    registerRequest.getPassword());
 
             // Generate token for the new user
             String token = jwtUtil.generateToken(user.getUsername());
@@ -105,7 +101,8 @@ public class AuthController {
         private String username;
         private String password;
 
-        public LoginRequest() {}
+        public LoginRequest() {
+        }
 
         public String getUsername() {
             return username;
@@ -129,7 +126,8 @@ public class AuthController {
         private String email;
         private String password;
 
-        public RegisterRequest() {}
+        public RegisterRequest() {
+        }
 
         public String getUsername() {
             return username;
