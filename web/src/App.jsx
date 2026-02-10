@@ -3,7 +3,6 @@ import './App.css';
 import Login from './assets/pages/Login';
 import Register from './assets/pages/Register';
 import Dashboard from './assets/pages/Dashboard';
-import ForgotPassword from './assets/pages/ForgotPassword';
 import Header from './components/Header';
 import RequireAuth from './components/RequireAuth';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -23,7 +22,6 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/forgot" element={<ForgotPassword />} />
             {/* Protected Route: Dashboard */}
             <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
             <Route path="/" element={<Navigate to="/login" />} />
