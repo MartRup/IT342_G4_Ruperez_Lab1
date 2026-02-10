@@ -27,6 +27,14 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
     public User createUser(String username, String email, String rawPassword) {
         String encoded = passwordEncoder.encode(rawPassword);
         User user = new User(username, email, encoded, LocalDateTime.now());
