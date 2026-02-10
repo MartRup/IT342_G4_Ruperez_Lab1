@@ -1,94 +1,151 @@
-Mini App – User Registration & Authentication
+# User Management System
 
-**1. Introduction**
-  
-1.1. Purpose
+A full-stack web application for user registration, authentication, and account management built with modern technologies.
 
-    The purpose of this document is to outline the functional and non-functional
-    requirements of the Mini App – User Registration & Authentication System. It is
-    intended for students, instructors, and developers who will design, analyze, and
-    eventually implement the system using ReactJS, Spring Boot, and MySQL.
+## 🚀 Features
 
+- **User Registration**: Create new accounts with username, email, and password
+- **Secure Authentication**: JWT-based login system with session management
+- **Protected Routes**: Dashboard access restricted to authenticated users
+- **User Management**: View and delete user accounts
+- **Responsive UI**: Modern React interface with routing
 
-1.2. Scope
+## 🛠️ Tech Stack
 
-    The system offers basic user account management features such as account registration,
-    login, logout, and access to a secured user dashboard. It ensures that only authenticated
-    users can view protected pages. This document concentrates exclusively on system
-    documentation and diagrams and does not cover code implementation.
-1.3. Definitions, Acronyms, and Abbreviations
+### Frontend
+- **React 19** - Modern UI library
+- **Vite** - Fast build tool and development server
+- **React Router DOM** - Client-side routing
+- **CSS Modules** - Scoped styling
 
-    ● FRS – Functional Requirements Specification
-    ● UI – User Interface
-    ● API – Application Programming Interface
-    ● ERD – Entity Relationship Diagram
-    ● JWT – JSON Web Token
-    ● CRUD – Create, Read, Update, Delete
+### Backend
+- **Spring Boot 4.0.2** - Java web framework
+- **Spring Security** - Authentication and authorization
+- **Spring Data JPA** - Database access abstraction
+- **JWT** - Token-based authentication
+- **MySQL** - Relational database
 
-**2. Overall Description**
+## 📁 Project Structure
 
-   2.1. System Perspective
+```
+IT342_G4_Ruperez_Lab1/
+├── backend/                 # Spring Boot application
+│   └── miniapplication/
+│       ├── src/main/java/  # Java source code
+│       │   └── com/example/miniapplication/
+│       │       ├── controller/  # REST controllers
+│       │       ├── entity/      # JPA entities
+│       │       ├── repository/  # Data access layers
+│       │       ├── service/     # Business logic
+│       │       └── config/      # Configuration classes
+│       └── src/main/resources/
+│           ├── application.properties  # App configuration
+│           └── data.sql               # Initial data
+├── web/                    # React frontend
+│   └── src/
+│       ├── assets/pages/   # Page components (Login, Register, Dashboard)
+│       ├── components/     # Reusable components
+│       └── App.jsx         # Main application component
+└── docs/                   # Documentation
+```
 
-    The system is a client–server application consisting of a React-based frontend, a Spring
-    Boot backend API, and a MYSQL database. The frontend manages user interactions, the
-    backend handles authentication logic, and MySQL stores user credentials and profile
-    information.
+## 🔧 Getting Started
 
-2.2. User Classes and Characteristics
+### Prerequisites
+- Java 11+
+- Node.js 16+
+- MySQL 8.0+
+- Maven 3.6+
 
-    **Guest User**
-    ● Does not have an account or is not currently logged in
-    ● Can create a new account
-    ● Can log in to the system
+### Backend Setup
 
-    **Authenticated User**
-    ● Has successfully logged in
-    ● Can access a personal dashboard or profile
-    ● Can log out of the system
+1. Navigate to the backend directory:
+```bash
+cd backend/miniapplication
+```
 
-2.3. Operating Environment
+2. Configure database in `src/main/resources/application.properties`:
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/your_database
+spring.datasource.username=your_username
+spring.datasource.password=your_password
+```
 
-    ● Frontend: ReactJS running on modern web browsers
-    ● Backend: Spring Boot REST API
-    ● Database: MySQL (for user credentials and profile data)
-    ● Tools: draw.io / diagrams.net for diagram creation
+3. Run the application:
+```bash
+./mvnw spring-boot:run
+```
 
-2.4. Assumptions and Dependencies
+The backend will start on `http://localhost:8080`
 
-    ● Users have access to the internet.
-    ● Firebase services are available and correctly configured.
-    ● The backend API is accessible from the frontend.
-    ● Passwords are securely hashed before being stored.
+### Frontend Setup
 
-**3. System Features and Functional Requirements**
- 
-3.1. Feature 1:
+1. Navigate to the web directory:
+```bash
+cd web
+```
 
-      Description: Allows a guest user to create a new account by submitting valid personal
-                   and login details.
-      **Functional Requirements**:
-      ● The system shall enable guest users to register using an email address and
-        password.
-      ● The system shall validate all required input fields.
-      ● The system shall save user information to the database after successful registration.
+2. Install dependencies:
+```bash
+npm install
+```
 
-3.2. Feature 2:
-      
-    Description: Enables registered users to log in, access secured areas of the system, and
-                 safely log out.
-    Functional Requirements:
-    ● The system shall verify user identity using valid login credentials.
-    ● The system shall issue an authentication token after a successful login.
-    ● The system shall prevent unauthenticated users from accessing protected pages.
-    ● The system shall terminate the session or invalidate the authentication token upon
-      logout.
+3. Start the development server:
+```bash
+npm run dev
+```
 
-**4. Non-Functional Requirements**
-       
-    ● Security: Passwords must be securely encrypted, and authentication tokens must be
-      properly protected.
-    ● Performance: Login and registration processes should respond within acceptable
-      timeframes.
-    ● Usability: The user interface should be simple, intuitive, and easy to use.
-    ● Reliability: The system should gracefully manage invalid inputs and authentication
-      errors.
+The frontend will start on `http://localhost:5173`
+
+## 🔄 API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/users` | Get all users |
+| GET | `/api/users/{id}` | Get user by ID |
+| POST | `/api/users` | Create new user |
+| DELETE | `/api/users/{id}` | Delete user |
+
+## 🔐 Authentication Flow
+
+1. User registers with username, email, and password
+2. User logs in with credentials
+3. Server validates and returns JWT token
+4. Client stores token and uses it for authenticated requests
+5. Protected routes check for valid token
+
+## 📱 Pages
+
+- **Login** (`/login`) - User authentication
+- **Register** (`/register`) - New user registration
+- **Dashboard** (`/dashboard`) - Protected user area (requires authentication)
+
+## 🎯 Key Components
+
+### Backend
+- `UserController` - Handles user-related HTTP requests
+- `UserService` - Business logic for user operations
+- `UserRepository` - Database operations
+- `User` - JPA entity representing user data
+- `WebConfig` - CORS and security configuration
+
+### Frontend
+- `App.jsx` - Main router configuration
+- `Login.jsx` - Authentication form
+- `Register.jsx` - User registration form
+- `Dashboard.jsx` - Protected user dashboard
+- `RequireAuth.jsx` - Route protection wrapper
+- `Header.jsx` - Navigation component
+
+## 📄 Documentation
+
+- [Software Requirements Specification (SRS)](docs/SRS_Ruperez.pdf)
+- [XAMPP Setup Guide](docs/USE_XAMPP.md)
+
+## 👨‍💻 Author
+
+Raymart Ruperez - IT342 G4
+
+## 📝 License
+
+This project is for educational purposes.
