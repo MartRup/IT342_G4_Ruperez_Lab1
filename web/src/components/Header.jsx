@@ -38,7 +38,11 @@ const Header = () => {
           {!token && <Link to="/login">Login</Link>}
           {!token && <Link to="/register">Register</Link>}
           {token && <Link to="/dashboard">Dashboard</Link>}
-          {token && <button className="logout" onClick={handleLogout}>Log out</button>}
+          {token && (
+            <button className="logout" onClick={handleLogout}>
+              Log out
+            </button>
+          )}
         </nav>
       </div>
     </header>
