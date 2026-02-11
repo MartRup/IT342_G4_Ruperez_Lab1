@@ -41,9 +41,9 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/users").permitAll() // Allow listing users for demo purposes
-                .requestMatchers("/actuator/**").permitAll() // Allow actuator endpoints if needed
+                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/users").permitAll() // Allow listing users for demo purposes
+                .antMatchers("/actuator/**").permitAll() // Allow actuator endpoints if needed
                 .anyRequest().authenticated()
             );
 
