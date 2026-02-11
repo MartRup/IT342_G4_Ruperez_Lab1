@@ -97,6 +97,27 @@ public class AuthController {
         }
     }
 
+    @GetMapping("/profile")
+    public ResponseEntity<?> getCurrentUser(Authentication authentication) {
+        try {
+            String username = authentication.getName();
+            User user = userService.findByUsername(username)
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("id", user.getId());
+            response.put("username", user.getUsername());
+            response.put("email", user.getEmail());
+            response.put("createdAt", user.getCreatedAt());
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("error", "Failed to fetch profile: " + e.getMessage());
+            return ResponseEntity.status(500).body(response);
+        }
+    }
+
     public static class LoginRequest {
         private String username;
         private String password;
