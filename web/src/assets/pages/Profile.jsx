@@ -7,7 +7,6 @@ const Profile = () => {
   const [firstName, setFirstName] = useState('User');
   const [email, setEmail] = useState('user@example.com');
   const [username, setUsername] = useState('username');
-  const [joinDate, setJoinDate] = useState('January 1, 2024');
   const [showEditModal, setShowEditModal] = useState(false);
   const [editForm, setEditForm] = useState({
     firstName: '',
@@ -19,12 +18,10 @@ const Profile = () => {
     const storedFirstName = localStorage.getItem('userFirstName');
     const storedEmail = localStorage.getItem('userEmail');
     const storedUsername = localStorage.getItem('userUsername');
-    const storedJoinDate = localStorage.getItem('userJoinDate');
     
     if (storedFirstName) setFirstName(storedFirstName);
     if (storedEmail) setEmail(storedEmail);
     if (storedUsername) setUsername(storedUsername);
-    if (storedJoinDate) setJoinDate(storedJoinDate);
     
     setEditForm({
       firstName: storedFirstName || 'User',
@@ -114,11 +111,7 @@ const Profile = () => {
             <span style={{ color: '#1e293b', fontWeight: 600 }}>{email}</span>
           </div>
           
-          <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid #e2e8f0' }}>
-            <span style={{ color: '#64748b', fontWeight: 500 }}>Member Since</span>
-            <span style={{ color: '#1e293b', fontWeight: 600 }}>{joinDate}</span>
-          </div>
-          
+                    
           <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0' }}>
             <span style={{ color: '#64748b', fontWeight: 500 }}>Account Status</span>
             <span style={{ 

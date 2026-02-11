@@ -57,6 +57,10 @@ export const authService = {
       body: JSON.stringify(userData),
     });
   },
+
+  getProfile: async () => {
+    return await apiRequest('/auth/profile');
+  },
 };
 
 export const userService = {
