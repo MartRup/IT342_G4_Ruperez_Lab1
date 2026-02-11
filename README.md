@@ -132,15 +132,65 @@ The frontend will start on `http://localhost:5173`
 ### Frontend
 - `App.jsx` - Main router configuration
 - `Login.jsx` - Authentication form
-- `Register.jsx` - User registration form
 - `Dashboard.jsx` - Protected user dashboard
 - `RequireAuth.jsx` - Route protection wrapper
 - `Header.jsx` - Navigation component
+
+## 📊 System Diagrams
+
+### 📋 Available Diagrams
+- **[Architecture Diagrams](ARCHITECTURE_DIAGRAM.md)** - Comprehensive system architecture documentation
+- **[Sequence Diagrams](SEQUENCE_DIAGRAMS.md)** - Detailed interaction flows and use case scenarios
+- **[ERD Documentation](ERD_Documentation.md)** - Entity Relationship Diagram and database schema
+- **[UML Class Diagram](UML_CLASS_DIAGRAM.md)** - Authentication system component relationships
+- **[Software Requirements Specification (SRS)](docs/SRS_Ruperez.pdf)** - Detailed project requirements and specifications
+
+### 🏗️ Key Architecture Components
+
+#### System Overview
+- **Three-Tier Architecture**: Frontend (React) ↔ Backend (Spring Boot) ↔ Database (MySQL)
+- **RESTful API Communication**: HTTP/JSON between layers
+- **JWT Authentication**: Token-based security for protected routes
+
+#### Frontend Architecture (React)
+- **Component-Based Structure**: Modular React components with clear separation of concerns
+- **Route Protection**: `RequireAuth` wrapper for authenticated routes
+- **State Management**: Local storage for JWT tokens and user data
+- **Responsive UI**: Modern CSS with mobile-first approach
+
+#### Backend Architecture (Spring Boot)
+- **Layered Architecture**: Controller → Service → Repository → Entity
+- **Spring Security**: Authentication and authorization framework
+- **JPA/Hibernate**: Object-relational mapping for database operations
+- **JWT Utilities**: Token generation and validation
+
+#### Data Flow
+1. **Authentication Flow**: Login → JWT Token → Protected Access
+2. **User Management**: CRUD operations with proper validation
+3. **Profile Management**: User data retrieval and updates
+
+### 🔄 Core Workflows
+
+#### Authentication Workflow
+```
+User → Login/Register → API Call → JWT Token → Dashboard Access
+```
+
+#### User Management Workflow
+```
+Dashboard → User Operations → API Requests → Database → Response
+```
+
+#### Profile Management Workflow
+```
+Dashboard → Profile Page → Local Storage → Edit Modal → Update
+```
 
 ## 📄 Documentation
 
 - [Software Requirements Specification (SRS)](docs/SRS_Ruperez.pdf)
 - [XAMPP Setup Guide](docs/USE_XAMPP.md)
+- [Architecture Diagrams](ARCHITECTURE_DIAGRAM.md)
 
 ## 👨‍💻 Author
 
