@@ -27,10 +27,10 @@
 		<url/>
 	</scm>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 
-	<!-- ensure compiler uses Java 11 -->
+	<!-- ensure compiler uses Java 17 -->
 	<build>
 		<plugins>
 			<plugin>
@@ -38,7 +38,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.11.0</version>
 				<configuration>
-					<release>11</release>
+					<release>17</release>
 				</configuration>
 			</plugin>
 			<plugin>
